@@ -9,10 +9,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject Player;
+    public ScriptableObjectCreation playerInfo;
+    [SerializeField] int level;
+    [SerializeField] float localTime;
+    [SerializeField] float globalTime;
+    private string displayLeveltime;
 
 
     public int[] potions = new int[3] { 0, 0, 0 };
@@ -38,32 +44,49 @@ public class GameManager : MonoBehaviour
         health = Player.GetComponent<BallPlayerController>().health;
         CheckLevelWin();
         PotionManagement();
+        KeepLocalTime();
+        KeepGlobalTime(playerInfo.currentLevel)
     }
-    public void HandleGameOver()
+    //public void HandleGameOver()
+    //{
+    //    gameOverPanel.SetActive(true);
+    //    allowInput = false;
+    //}
+    void KeepLocalTime()
     {
-        gameOverPanel.SetActive(true);
-        allowInput = false;
+        localTime = localTime + Time.deltaTime;
+        globalTime = Time.deltaTime;
+
+        int minutes = 0;
+        int seconds = (int)localTime;
+        //if thers s60 seconds passed, increment the minute and restart
+        if (localTime >= 60)
+        {
+            localTime = 0;
+            minutes++;
+        }
+        displayLeveltime = $"{minutes}m, {seconds}s";
+    }
+    void KeepGlobalTime(int currentLevel)
+    {
+        playerInfo.
     }
     public void CheckLevelWin()
     {
-        if (coins == 10)
-        {
-            youWinPanel.SetActive(true);
-            allowInput = false;
-        }
+        //if (coins == 10)
+        //{
+        //    youWinPanel.SetActive(true);
+        //    allowInput = false;
+        //}
     }
     public void Restart()
     {
         //set potions counts to 0
         //reload level
     }
-    public void GotoNextLevel()
-    {
-        Debug.Log("Next Level");
-    }
     public void UpdateData(int hp)
     {
-        UIText.text = ($"Player HP: {hp}\n Health Potions:{potions[0]}\n Invincibility Potions:{potions[1]}\n longer Invincibility Potions:{potions[2]}\n Coins Collected:{coins}");
+        UIText.text = ($"Player HP: {hp}\n Coins Collected:{coins}");
     }
     void PotionManagement()
     {
@@ -98,5 +121,12 @@ public class GameManager : MonoBehaviour
                 UpdateData(health);
             }
         }
+    }
+    void ShiftScene(int _levelArrayIdx)
+    {
+        //if ()
+        string[] levels = new string[] { "DesignLevelOne", "DesignLevelTwo", "DesignLevelThree" };
+
+        SceneManager.LoadScene(levels[_levelArrayIdx]);
     }
 }

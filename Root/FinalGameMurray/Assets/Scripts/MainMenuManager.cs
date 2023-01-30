@@ -13,17 +13,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button returnButton;
     [SerializeField] private GameObject[] canvas = new GameObject[2];
     //0 is start, 1 is help
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void StartButton()
     {
         SceneManager.LoadScene("DesignLevelOne");

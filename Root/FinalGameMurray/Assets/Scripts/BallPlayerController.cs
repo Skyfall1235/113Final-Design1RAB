@@ -19,7 +19,7 @@ public class BallPlayerController : MonoBehaviour
     private Rigidbody playerRB;
     [SerializeField] private Transform camTransform;
     Vector3 moveDirection;
-    //[SerializeField] private GameObject GameManager;
+    [SerializeField] private GameObject GameManager;
     public bool isInvincible = false;
 
     [Header("lives")]
@@ -31,7 +31,7 @@ public class BallPlayerController : MonoBehaviour
     {
         //i needed the rigidbody to make it move, gotta put it somewhere
         playerRB = GetComponent<Rigidbody>();
-        //GameManager.GetComponent<GameManager>().UpdateData(health);
+        GameManager.GetComponent<GameManager>().UpdateData(health);
 
     }
     private void Update()
@@ -39,7 +39,7 @@ public class BallPlayerController : MonoBehaviour
         //basic camera controls, which help out the camera controller
         Quaternion cameraRot = camTransform.transform.rotation;
         transform.rotation = cameraRot;
-        //GameManager.GetComponent<GameManager>().UpdateData(health);
+        GameManager.GetComponent<GameManager>().UpdateData(health);
     }
     void FixedUpdate()
     {
@@ -60,6 +60,11 @@ public class BallPlayerController : MonoBehaviour
             playerRB.AddForce(moveDirection.normalized * speed, ForceMode.Force);
         }
     }
+
+    //void UpdateScriptableObject()
+    //{
+
+    //}
     #endregion
     #region Trigger Conditions
     void OnTriggerEnter(Collider other)
@@ -94,7 +99,7 @@ public class BallPlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             //play a pickup sound effect
             //GameManager.GetComponent<SoundManager>().PlayAudioClip(2);
-            //GameManager.GetComponent<GameManager>().coins++;
+            GameManager.GetComponent<GameManager>().coins++;
 
         }
         if (other.gameObject.tag == ("Bomb") && !isInvincible)
