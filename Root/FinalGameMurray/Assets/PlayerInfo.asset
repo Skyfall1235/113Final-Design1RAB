@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d605db2ee1e09f409476ff8562cd1b3, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  levelOneTime: 0
+  levelOneTime: 37.97683
   levelTwoTime: 0
   levelThreeTime: 0
-  totalTime: 0
+  totalTime: 37.97683
   deaths: 0
-  currentLevel: 0
+  currentLevel: 2
