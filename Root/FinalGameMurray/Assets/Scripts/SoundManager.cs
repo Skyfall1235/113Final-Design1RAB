@@ -17,6 +17,10 @@ public class SoundManager : MonoBehaviour
     //the audio and volume stored in lists
     [SerializeField] List<AudioClip> audioClips = new List<AudioClip>();
     [SerializeField] List<float> audioVolume = new List<float>();
+    private void Start()
+    {
+        audioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
+    }
     public void PlayAudioClip(int clipNumber)
     {
         //make sure the audiosource exists first
@@ -24,5 +28,6 @@ public class SoundManager : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClips[clipNumber], audioVolume[clipNumber]);
         }
+        
     }
 }

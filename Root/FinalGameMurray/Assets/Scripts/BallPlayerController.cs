@@ -21,10 +21,11 @@ public class BallPlayerController : MonoBehaviour
     Vector3 moveDirection;
     [SerializeField] private GameObject GameManager;
     public bool isInvincible = false;
+    [SerializeField] private GameObject SpawnPosition;
 
     [Header("lives")]
     public int health = 100;
-    [SerializeField] private int healValue = 10;
+    
     
     #region Start, Update, and FixedUpdate
     void Start()
@@ -78,40 +79,20 @@ public class BallPlayerController : MonoBehaviour
             //GameManager.GetComponent<GameManager>().potions[0]++;
 
         }
-        if (other.gameObject.tag == ("Invincible Potion"))
-        {
-            other.gameObject.SetActive(false);
-            //play a pickup sound effect
-            //GameManager.GetComponent<SoundManager>().PlayAudioClip(1);
-            //GameManager.GetComponent<GameManager>().potions[1]++;
-
-        }
-        if (other.gameObject.tag == ("Invincible x2 Potion"))
-        {
-            other.gameObject.SetActive(false);
-            //play a pickup sound effect
-            //GameManager.GetComponent<SoundManager>().PlayAudioClip(1);
-            //GameManager.GetComponent<GameManager>().potions[2]++;
-
-        }
         if (other.gameObject.tag == ("Coin"))
         {
             other.gameObject.SetActive(false);
             //play a pickup sound effect
-            //GameManager.GetComponent<SoundManager>().PlayAudioClip(2);
+            GameManager.GetComponent<SoundManager>().PlayAudioClip(0);
             GameManager.GetComponent<GameManager>().coins++;
+            
 
         }
-        if (other.gameObject.tag == ("Bomb") && !isInvincible)
+        if (other.gameObject.tag == "DeathPlane")
         {
-            other.gameObject.SetActive(false);
-            TakeDamage(10);    
-            //play a pickup sound effect
-            //GameManager.GetComponent<SoundManager>().PlayAudioClip(3);
-            if (health <= 0)
-            {
-                //GameManager.GetComponent<GameManager>().HandleGameOver();
-            }
+            //reset the player to spawn
+            transform.position = SpawnPosition.transform.position;
+
         }
     }
     //funky n fun takedamage method with is very reusable (its in like 4 projects of mine)
@@ -121,30 +102,7 @@ public class BallPlayerController : MonoBehaviour
         health -= damageValue;
         //GameManager.GetComponent<GameManager>().UpdateData(health);
     }
+    #endregion
 
-    #endregion
-    #region player on world interaction
-    //croutine
-    public IEnumerator InvicibilityTime(float time)
-    {
-        StartInvincible();
-        Debug.Log("is invincible");
-        yield return new WaitForSeconds(time);
-        endInvincibility();
-        Debug.Log("is not invincible");
-    }
-    public void StartInvincible()
-    {
-        isInvincible = true;
-    }
-    public void endInvincibility()
-    {
-        isInvincible = false;
-    }
-    public void HealSelf()
-    {
-        health += healValue;
-    }
-    #endregion
 }
 

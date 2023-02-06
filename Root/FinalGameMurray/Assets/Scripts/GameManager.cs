@@ -44,8 +44,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         health = Player.GetComponent<BallPlayerController>().health;
-        CheckLevelWin();
-        PotionManagement();
         if(timerAllowed == true)
         {
             KeepLocalTime();
@@ -90,16 +88,9 @@ public class GameManager : MonoBehaviour
         //playerInfo.level1 +level2 +level3 time
         //diplay time
     }
+
     #endregion
     #region Crucial Functions
-    public void CheckLevelWin()
-    {
-        //if (coins == 10)
-        //{
-        //    youWinPanel.SetActive(true);
-        //    allowInput = false;
-        //}
-    }
 
     public void SaveData(int currentLevel)
     {
@@ -126,13 +117,24 @@ public class GameManager : MonoBehaviour
         //set potions counts to 0
         //reload level
     }
+    private void OnApplicationQuit()
+    {
+        playerInfo.levelOneTime = 0;
+        playerInfo.levelTwoTime = 0;
+        playerInfo.levelThreeTime = 0;
+        playerInfo.totalTime = 0;
+        playerInfo.deaths = 0;
+        playerInfo.currentLevel = 0;
+    }
     public void UpdateData(int hp)
     {
         coinText.text = ($"Player HP: {hp}\n Coins Collected:{coins}");
     }
     #endregion
+
     void ChangeColorOfText()
     {
+        //SETS THE COLOR TO Red as requested when all coins in scene are picked up
         if (coins >= 10)
         {
             timeText.color = Color.red;
@@ -140,45 +142,11 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    void PotionManagement()
-    {
-        if (allowInput)
-        {
-            if (Input.GetKeyDown(KeyCode.R) && potions[0] > 0)
-            {
-                //give player health back
-                if (health >= 100) { return; }
-                Player.GetComponent<BallPlayerController>().HealSelf();
-                Debug.Log("gave 10 health");
-                potions[0]--;
-                UpdateData(health);
-            }
-            if (Input.GetKeyDown(KeyCode.G) && potions[1] > 0)
-            {
-                //if player is already invincible, dont do it
-                if (Player.GetComponent<BallPlayerController>().isInvincible == true) { return; }
-                //short invincibilty
-                Player.GetComponent<BallPlayerController>().InvicibilityTime(5);
-                potions[1]--;
-                UpdateData(health);
-            }
-            if (Input.GetKeyDown(KeyCode.B) && potions[2] > 0)
-            {
-                //if player is already invincible, dont do it
-                Debug.Log("is invincible");
-                if (Player.GetComponent<BallPlayerController>().isInvincible == true) { return; }
-                //longer invincibility
-                Player.GetComponent<BallPlayerController>().InvicibilityTime(10);
-                potions[2]--;
-                UpdateData(health);
-            }
-        }
-    }
+    
     public void ShiftScene(int _levelArrayIdx)
     {
-        
-        string[] levels = new string[] { "DesignLevelOne", "DesignLevelTwo", "WinScene" };
-
+        //simple shift scene functiuon that moves scenes based on the parameter
+        string[] levels = new string[] { "MainMenu", "DesignLevelOne", "DesignLevelTwo", "WinScene" };
         SceneManager.LoadScene(levels[_levelArrayIdx]);
     }
 }

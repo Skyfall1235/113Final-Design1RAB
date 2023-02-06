@@ -13,14 +13,7 @@ public class NextScenetrigger : MonoBehaviour
     void Start()
     {
         levelToGoTo = playerData.currentLevel + 1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
+    } 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && gameManager.GetComponent<GameManager>().coins == 10)

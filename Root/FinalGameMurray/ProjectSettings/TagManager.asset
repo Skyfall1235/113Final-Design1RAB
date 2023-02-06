@@ -9,6 +9,8 @@ TagManager:
   - Health Potion
   - Invincible Potion
   - Invincible x2 Potion
+  - DeathPlane
+  - GameManager
   layers:
   - Default
   - TransparentFX
