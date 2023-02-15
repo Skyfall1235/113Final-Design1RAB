@@ -11,6 +11,7 @@ TagManager:
   - Invincible x2 Potion
   - DeathPlane
   - GameManager
+  - Moving
   layers:
   - Default
   - TransparentFX

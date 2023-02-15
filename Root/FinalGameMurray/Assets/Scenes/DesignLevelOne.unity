@@ -611,6 +611,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000013555364002, guid: 5142a683d65bbf84abea6f07db9099c7, type: 3}
   m_PrefabInstance: {fileID: 812502625}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &539592691 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1601620649726146153, guid: c4140cfc52a49154b9c19b216f8c5572, type: 3}
+  m_PrefabInstance: {fileID: 2195004147145788000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &682719025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3078,6 +3083,10 @@ PrefabInstance:
       propertyPath: UIText
       value: 
       objectReference: {fileID: 84942539}
+    - target: {fileID: 5089037080668858024, guid: 08767d0bb06afa04495de5de0805c4f2, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 539592691}
     - target: {fileID: 5089037080668858024, guid: 08767d0bb06afa04495de5de0805c4f2, type: 3}
       propertyPath: coinText
       value: 

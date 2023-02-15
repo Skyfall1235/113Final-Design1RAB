@@ -103,6 +103,23 @@ public class BallPlayerController : MonoBehaviour
         //GameManager.GetComponent<GameManager>().UpdateData(health);
     }
     #endregion
+    private Transform previousParent;
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Moving" && transform.parent == null)
+        {
+            previousParent = transform.parent;
+            transform.SetParent(collision.transform);
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.tag == "Moving" && transform.parent == collision.transform)
+        {
+            transform.SetParent(previousParent);
+        }
+    }
 }
 

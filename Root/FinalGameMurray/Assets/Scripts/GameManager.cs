@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float localTime;
     [SerializeField] float globalTime;
     [SerializeField] private string displayLeveltime;
+    [SerializeField] private Animator animator;
 
 
     public int[] potions = new int[3] { 0, 0, 0 };
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        health = Player.GetComponent<BallPlayerController>().health;
+        //health = Player.GetComponent<BallPlayerController>().health;
         if(timerAllowed == true)
         {
             KeepLocalTime();
@@ -142,11 +143,14 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    
-    public void ShiftScene(int _levelArrayIdx)
+    public IEnumerator ShiftScene(int _levelArrayIdx)
     {
         //simple shift scene functiuon that moves scenes based on the parameter
+        //animator.SetTrigger("start");
+        Debug.Log("transition");
+        yield return new WaitForSeconds(1);
         string[] levels = new string[] { "MainMenu", "DesignLevelOne", "DesignLevelTwo", "WinScene" };
         SceneManager.LoadScene(levels[_levelArrayIdx]);
     }
+
 }

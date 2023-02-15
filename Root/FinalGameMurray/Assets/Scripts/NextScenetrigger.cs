@@ -21,7 +21,9 @@ public class NextScenetrigger : MonoBehaviour
             //save the data first
             gameManager.GetComponent<GameManager>().SaveData(playerData.currentLevel);
             //send us over to thew next scene
-            gameManager.GetComponent<GameManager>().ShiftScene(levelToGoTo);
+            //gameManager.GetComponent<GameManager>().ShiftScene(levelToGoTo);
+            StartCoroutine(gameManager.GetComponent<GameManager>().ShiftScene(levelToGoTo));
+            Debug.Log("collided with end");
         }
     }
 }
